@@ -4,15 +4,20 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { UiProvider } from './context/Ui/UiProvider';
+import { SWRConfig } from "swr";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <UiProvider>
-      <App />
-    </UiProvider>
+    <SWRConfig value={ {
+      fetcher: (resource, init) => fetch(resource, init).then(res => res.json())
+    }} >
+      <UiProvider>
+        <App />
+      </UiProvider>
+    </SWRConfig>
   </React.StrictMode>
 );
 
