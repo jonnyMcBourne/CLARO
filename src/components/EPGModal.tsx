@@ -14,7 +14,7 @@ export const EPGModal = () =>
     <Box>
       <Dialog
         open={ isModalOpen }
-        transitionDuration={ 700 }
+        transitionDuration={ 800 }
         fullScreen
        sx={ { backdropFilter: 'blur(4px)', transition: 'all 0.5s ease-out', maxWidth:'100vw'} }
       >

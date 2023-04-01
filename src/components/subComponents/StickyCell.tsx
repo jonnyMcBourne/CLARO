@@ -1,5 +1,5 @@
-import TableCell from '@mui/material/TableCell';
 import { FC } from 'react';
+import TableCell from '@mui/material/TableCell';
 interface Props
 {
     content:string
@@ -8,6 +8,6 @@ interface Props
 export const StickyCell:FC<Props> = ({content}) =>
 {
   return (
-      <TableCell sx={ { backgroundColor:'#3A3C40',minWidth: '300px', position: 'sticky', left: 0, zIndex: 1 } }>{ content}</TableCell>
+      <TableCell sx={ { backgroundColor:'#3A3C40',minWidth: '300px', position: 'sticky', top:0, left: 0, zIndex: 2 } }>{ content}</TableCell>
   )
 }
