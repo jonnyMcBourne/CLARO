@@ -3,7 +3,7 @@ import React from 'react'
 
 export const ProgramDetails = () => {
   return (
-      <Box sx={{ backgroundColor:'blue', width:'100%', height:'80%'}} >
+      <Box sx={{ backgroundColor:'white', width:'100%', height:'40vh',position:'absolute',top:0,left:0}} >
           Details
    </Box>
   )

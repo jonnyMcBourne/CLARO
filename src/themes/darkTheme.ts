@@ -58,8 +58,9 @@ export const darkTheme = createTheme({
           textTransform: 'none',
           boxShadow: 'none',
           borderRadius: 10,
+          backgroundColor:'rgb(30,144,255)',
           ":hover": {
-            backgroundColor: 'rgba(0,0,0,0.05)',
+            backgroundColor: 'rgba(65,105,225)',
             transition: 'all 0.3s ease-in-out'
           }
         }
