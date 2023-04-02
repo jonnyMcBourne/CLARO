@@ -1,25 +1,21 @@
 
-
-export const getInitialhoursArray = (initialHour=0, finishHour=4) =>
-{
-  if (finishHour < initialHour)
-  {
-    throw Error('initialHour cannot be smaller than finishHour')
+export const getDatesArray = (initialHour: number, numHours: number) => {
+  if (numHours <= 0) {
+    throw Error('numHours cannot be negative or zero');
   }
-  const minutesPerHalfHour = 30;
-  const minutesInHour = 60;
-  const initMinutes = (initialHour * minutesInHour)+30;
-  const finishMinutes = finishHour * minutesInHour;
-  const halfHours = [];
+  const currentDate = new Date();
+  const startTime = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), initialHour, 0);
+  const timeIncrement = 30 * 60 * 1000; // 30 minutes in milliseconds
+  const datesArray = [];
 
-  for (let i = initMinutes; i <= finishMinutes; i += minutesPerHalfHour) {
-    const hours = Math.floor(i / minutesInHour);
-    const minutes = (i % minutesInHour).toString().padStart(2, '0');
-    const time = `${hours}:${minutes}`;
-    halfHours.push(time);
+  for (let i = 0; i < numHours * 2; i++) {
+    const time = startTime.getTime() + i * timeIncrement;
+    const date = new Date(time);
+    datesArray.push(date);
   }
-  return halfHours;
-}
+  
+  return datesArray;
+};
 
 export const getStringTail = (from: string = '20230331000000', to: string = '20230401000000', quantity: number=50) =>
 {

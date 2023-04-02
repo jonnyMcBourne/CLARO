@@ -1,13 +1,13 @@
 import { Box } from '@mui/material'
 import React, { useContext } from 'react'
 import { UIContext } from '../../context/Ui/UiContext';
-import { getInitialhoursArray } from '../../utils';
-
+//import { getInitialhoursArray } from '../../utils';
+/*
 export const TimeHeader = () =>
 {
       const { currentDate } = useContext(UIContext);
   
-  const hours = getInitialhoursArray(currentDate.getHours() - 1, currentDate.getHours() + 4);
+  //const hours = getInitialhoursArray(currentDate.getHours() - 1, currentDate.getHours() + 4);
     return (
         <Box sx={{display:'flex'}}>
     {
@@ -20,3 +20,5 @@ export const TimeHeader = () =>
       </Box>
   )
 }
+
+*/
