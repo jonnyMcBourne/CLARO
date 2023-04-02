@@ -1,11 +1,10 @@
 import { useContext, } from 'react'
-import { Dialog, Grid, IconButton } from '@mui/material'
+import { Dialog, IconButton } from '@mui/material'
 import { UIContext } from '../context/Ui/UiContext'
 import CloseIcon from '@mui/icons-material/Close';
 import { Box } from '@mui/system';
 import { ProgramDetails } from './ProgramDetails';
 import { ProgramTable } from './ProgramTable';
-import EPGApi from '../api/EPGApi';
 
 export const EPGModal = () =>
 {

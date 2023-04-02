@@ -1,14 +1,7 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { UIContext } from '../context/Ui/UiContext';
 import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableRow from '@mui/material/TableRow';
-import { TableHead } from '@mui/material';
 import { useContext } from 'react';
-import { UseProgram } from '../hooks/UseProgram';
-import { baseUrl, hours } from '../utils';
 import { ColumnChannel } from './subComponents';
 import { HeaderTable } from './HeaderTable';
 
@@ -17,19 +10,32 @@ import { HeaderTable } from './HeaderTable';
 export const ProgramTable = () =>
 {
 
-  const { isModalOpen, toggleModal, channels,currentDate } = useContext(UIContext);
-  console.log(channels);
-  console.log(currentDate);
-  const { data, error, isLoading, } = UseProgram(baseUrl);
+  const { isModalOpen, toggleModal, channels, currentDate } = useContext(UIContext);
+  const tableRef = useRef<HTMLDivElement>(null);
+  
+
 
   const handleOnScroll = (e:React.UIEvent<HTMLDivElement>) =>
   {
     const { scrollTop, scrollLeft }= e?.currentTarget
 
   }
+useEffect(() => {
+  if (tableRef && tableRef.current) {
+    const currentTime = Array.from(
+      tableRef.current.querySelectorAll('.MuiBox-root')
+    ).find((elem) => (elem as HTMLDivElement).innerText  === `${currentDate.getHours()}:00`) as HTMLElement;
+    
+    console.log(currentTime);
+    if (currentTime) {
+      tableRef.current.scrollLeft = currentTime.offsetLeft;
+    }
+  }
+}, [currentDate]);
+
 
   return (
-    <Box sx={{backgroundColor:'yellow',width:'100%',position:'absolute',bottom:0,height:'60%', overflowX:'scroll',overflowY:'scroll'}}>
+    <Box sx={{width:'100%',position:'absolute',bottom:0,height:'60%', overflowX:'scroll',overflowY:'scroll'}} ref={tableRef} >
       <HeaderTable/>
       <ColumnChannel />
     </Box>

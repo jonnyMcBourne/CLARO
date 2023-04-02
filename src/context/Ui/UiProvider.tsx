@@ -1,8 +1,5 @@
 import axios from 'axios'
-import { channel } from 'diagnostics_channel'
-import moment from 'moment'
 import { FC, PropsWithChildren, useEffect, useReducer, useRef } from 'react'
-import EPGApi from '../../api/EPGApi'
 import { Channel, IEpg } from '../../interfaces/IProgram'
 import { getStringTail } from '../../utils'
 import { UIContext } from './UiContext'
@@ -52,17 +49,12 @@ export const UiProvider: FC<PropsWithChildren<Props>> = ({ children }) =>
         }
         const now = new Date();
         const currentYear = now.getFullYear();
-        console.log(currentYear);
         const currentMonth = now.getMonth().toLocaleString('en-US', { minimumIntegerDigits: 2 });
-        console.log(currentMonth);
         const currentDay = now.getDay().toLocaleString('en-US', { minimumIntegerDigits: 2 });
-        console.log({ currentDay });
         const currentHour = now.getHours();
-        const currentDate = (currentYear.toString() + currentMonth.toString() + currentDay.toString() + (currentHour-1).toString()) + '0000';
+        const currentDate = (currentYear.toString() + currentMonth.toString() + currentDay.toString() + (currentHour-1).toString()) + '3000';
         const modifiedDate = (currentYear.toString() + currentMonth.toString() + currentDay.toString() + (currentHour+4).toString())+'0000';
-        console.log({currentDate})
-        console.log({ modifiedDate })
-        console.log(getStringTail(currentDate, modifiedDate));
+     
         axios.get<IEpg>(getStringTail(currentDate, modifiedDate)).then((resp) =>
         {
             dispatch({ type: '[UI]-UPDATE-CHANNELS', payload: resp.data.response.channels });

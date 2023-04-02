@@ -1,10 +1,24 @@
-export const hours: string[] = [];
-for (let i = 0; i < 48; i++)
+
+
+export const getInitialhoursArray = (initialHour=0, finishHour=4) =>
 {
-  const hour = Math.floor(i / 2);
-  const minute = i % 2 === 0 ? '00' : '30';
-  const time = `${ hour.toString().padStart(2, '0') }:${ minute }`;
-  hours.push(time);
+  if (finishHour < initialHour)
+  {
+    throw Error('initialHour cannot be smaller than finishHour')
+  }
+  const minutesPerHalfHour = 30;
+  const minutesInHour = 60;
+  const initMinutes = (initialHour * minutesInHour)+30;
+  const finishMinutes = finishHour * minutesInHour;
+  const halfHours = [];
+
+  for (let i = initMinutes; i <= finishMinutes; i += minutesPerHalfHour) {
+    const hours = Math.floor(i / minutesInHour);
+    const minutes = (i % minutesInHour).toString().padStart(2, '0');
+    const time = `${hours}:${minutes}`;
+    halfHours.push(time);
+  }
+  return halfHours;
 }
 
 export const getStringTail = (from: string = '20230331000000', to: string = '20230401000000', quantity: number=50) =>
