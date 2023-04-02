@@ -5,10 +5,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Box } from '@mui/system';
 import { ProgramDetails } from './ProgramDetails';
 import { ProgramTable } from './ProgramTable';
+import EPGApi from '../api/EPGApi';
 
 export const EPGModal = () =>
 {
   const { isModalOpen, toggleModal } = useContext(UIContext);
+
+
 
   return (
     <Box>
@@ -22,11 +25,8 @@ export const EPGModal = () =>
           <CloseIcon />
         </IconButton>
         <Box sx={ { display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '100%' } } >
-          <Grid container >
               <ProgramDetails />
               <ProgramTable />
-
-          </Grid>
         </Box>
       </Dialog>
     </Box>

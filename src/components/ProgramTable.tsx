@@ -9,15 +9,18 @@ import { TableHead } from '@mui/material';
 import { useContext } from 'react';
 import { UseProgram } from '../hooks/UseProgram';
 import { baseUrl, hours } from '../utils';
-import { RowChannelCell,StickyCell } from './subComponents';
+import { ColumnChannel } from './subComponents';
+import { HeaderTable } from './HeaderTable';
 
 
 
 export const ProgramTable = () =>
 {
 
-  const { isModalOpen, toggleModal } = useContext(UIContext);
-  const { data, error, isLoading } = UseProgram(baseUrl);
+  const { isModalOpen, toggleModal, channels,currentDate } = useContext(UIContext);
+  console.log(channels);
+  console.log(currentDate);
+  const { data, error, isLoading, } = UseProgram(baseUrl);
 
   const handleOnScroll = (e:React.UIEvent<HTMLDivElement>) =>
   {
@@ -26,7 +29,9 @@ export const ProgramTable = () =>
   }
 
   return (
-    <Box>
+    <Box sx={{backgroundColor:'yellow',width:'100%',position:'absolute',bottom:0,height:'60%', overflowX:'scroll',overflowY:'scroll'}}>
+      <HeaderTable/>
+      <ColumnChannel />
     </Box>
   );
 }

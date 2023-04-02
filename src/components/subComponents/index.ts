@@ -1,2 +1,2 @@
-export * from './RowChannelCell';
+export * from './ColumnChannels';
 export * from './DateStickyCell';
