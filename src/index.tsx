@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { UiProvider } from './context/Ui/UiProvider';
 import { SWRConfig } from "swr";
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { darkTheme } from './themes';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,7 +17,10 @@ root.render(
       fetcher: (resource, init) => fetch(resource, init).then(res => res.json())
     }} >
       <UiProvider>
-        <App />
+        <ThemeProvider theme={ darkTheme}>
+          <CssBaseline/>
+            <App />
+        </ThemeProvider>
       </UiProvider>
     </SWRConfig>
   </React.StrictMode>

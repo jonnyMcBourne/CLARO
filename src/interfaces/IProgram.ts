@@ -55,8 +55,8 @@ export interface Event {
     name:                     Name;
     description:              null;
     talent:                   null;
-    date_begin:               string;
-    date_end:                 string;
+    date_begin:               string | Date;
+    date_end:                 string | Date;
     unix_begin:               number;
     unix_end:                 number;
     duration:                 string;
