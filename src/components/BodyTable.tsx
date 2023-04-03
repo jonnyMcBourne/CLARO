@@ -15,9 +15,6 @@ export const BodyTable = () =>
     const dateBegin = new Date(event_beginning);
     const diff = (dateBegin.getTime() - startingTime.getTime()) / (1000 * 60)
     const marginRight = diff * 0.6666666667;
-    console.log({startingTime}),
-      console.log({ event_beginning })
-    console.log({marginRight})
     return `${marginRight}em`;
   }
    

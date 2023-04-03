@@ -8,7 +8,7 @@ export const HeaderTable = () =>
 {
   const { currentDate } = useContext(UIContext);
 
-  const hours = getDatesArray(currentDate.getHours() - 1, 10);
+  const hours = getDatesArray(currentDate.getHours() - 1, 6);
 
   const formatHour = (date: Date) =>
   {

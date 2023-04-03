@@ -22,7 +22,7 @@ useEffect(() => {
   if (tableRef && tableRef.current) {
     const currentTime = Array.from(
       tableRef.current.querySelectorAll('.MuiBox-root')
-    ).find((elem) => (elem as HTMLDivElement).innerText  === `${currentDate.getHours()-1}:30`) as HTMLElement;
+    ).find((elem) => (elem as HTMLDivElement).innerText  === `${currentDate.getHours()-1}:30:00`) as HTMLElement;
     if (currentTime) {
       tableRef.current.scrollLeft = currentTime.offsetLeft;
     }

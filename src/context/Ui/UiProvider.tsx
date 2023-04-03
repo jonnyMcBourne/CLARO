@@ -17,7 +17,9 @@ export interface IUiInitialState
 }
 const setStartingTime = (date:Date) =>
 {
+    
     date.setMinutes(0, 0, 0);
+
     return date
 }
 export const UiInitialState:IUiInitialState = {
@@ -25,6 +27,7 @@ export const UiInitialState:IUiInitialState = {
     channels: [],
     currentDate: new Date(),
     startingTime: setStartingTime( new Date(Date.now() - 60 * 60 * 1000)),
+    //startingTime: setStartingTime( new Date(Date.now())),
     event: undefined,
 }
 
