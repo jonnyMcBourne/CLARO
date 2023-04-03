@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Box } from '@mui/system'
 import { DateStickyCell } from './subComponents'
 import { UIContext } from '../context/Ui/UiContext'
-import { getDatesArray } from '../utils'
+import { cellWidth, getDatesArray } from '../utils'
 
 export const HeaderTable = () =>
 {
@@ -16,15 +16,15 @@ export const HeaderTable = () =>
   }
 
   return (
-    <Box sx={ { display: 'flex', width: '100%'} }>
+    <Box sx={ { display: 'flex', width: '100%', position:'sticky',top:0} }>
       <DateStickyCell content='Hoy' />
       {
             hours.map((hour,i) =>
         {
-              return <Box key={ `${ hour }-${ i }` } sx={ { minWidth: '15%' } }>{ formatHour(hour)}</Box> 
+              return <Box key={ `${ hour }-${ i }` } sx={ { minWidth: cellWidth } }>{ formatHour(hour)}</Box> 
         })
       }
-      <Box sx={ { minWidth: '15%', backgroundColor: 'red', position:'sticky', top:0,right:0 } }>Buttons</Box>
+      <Box sx={ { minWidth: cellWidth, backgroundColor: 'red', position:'sticky', top:0,right:0 } }>Buttons</Box>
     </Box>
   )
 }
