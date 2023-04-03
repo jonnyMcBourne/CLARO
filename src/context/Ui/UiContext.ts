@@ -7,6 +7,7 @@ export interface UiContextProps {
     currentDate: Date;
     startingTime: Date;
     event: Event | undefined;
+    query: { currentDateQuery: string, finishDateQuery: string, quantity: string }
     //functions
     toggleModal: () => void
     updateChannels: (channels: Channel[]) => void
