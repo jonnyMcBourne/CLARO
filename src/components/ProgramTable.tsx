@@ -32,7 +32,7 @@ useEffect(() => {
       tableRef.current.scrollLeft = currentTime.offsetLeft;
     }
   }
-}, [currentDate,currentDate]);
+}, [currentDate]);
 
 
   return (
