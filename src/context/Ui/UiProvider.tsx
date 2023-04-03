@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { FC, PropsWithChildren, useEffect, useReducer, useRef } from 'react'
+import { FC, PropsWithChildren, useEffect, useReducer } from 'react'
 import { Channel, Event, IEpg } from '../../interfaces/IProgram'
 import { getStringTail } from '../../utils'
 import { UIContext } from './UiContext'
