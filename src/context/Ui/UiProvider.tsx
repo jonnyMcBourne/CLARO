@@ -12,11 +12,23 @@ export interface IUiInitialState
     isModalOpen: boolean
     channels: Channel[]
     currentDate: Date;
+    startingTime: Date;
+    event: Event | undefined;
+}
+const setStartingTime = (date:Date) =>
+{
+    
+    date.setMinutes(0, 0, 0);
+
+    return date
 }
 export const UiInitialState:IUiInitialState = {
     isModalOpen: false,
     channels: [],
-    currentDate: new Date()
+    currentDate: new Date(),
+    startingTime: setStartingTime( new Date(Date.now() - 60 * 60 * 1000)),
+    //startingTime: setStartingTime( new Date(Date.now())),
+    event: undefined,
 }
 
 
@@ -49,14 +61,21 @@ export const UiProvider: FC<PropsWithChildren<Props>> = ({ children }) =>
         }
         const now = new Date();
         const currentYear = now.getFullYear();
-        const currentMonth = now.getMonth().toLocaleString('en-US', { minimumIntegerDigits: 2 });
-        const currentDay = now.getDay().toLocaleString('en-US', { minimumIntegerDigits: 2 });
-        const currentHour = now.getHours();
-        const currentDate = (currentYear.toString() + currentMonth.toString() + currentDay.toString() + (currentHour-1).toString()) + '3000';
-        const modifiedDate = (currentYear.toString() + currentMonth.toString() + currentDay.toString() + (currentHour+4).toString())+'0000';
+        const currentMonth = (now.getMonth()+1).toLocaleString('en-US', { minimumIntegerDigits: 2 });
+        const currentDay = now.getDate().toLocaleString('en-US', { minimumIntegerDigits: 2 });
+        //console.log('currentDay', currentDay);
+        const currentHour = now.getHours() < 10 ? "0" + now.getHours() : now.getHours().toString();
+        //console.log(currentHour)
+        const currentDate = `${currentYear}${currentMonth}${currentDay}${(parseInt(currentHour) - 1).toString().padStart(2, "0")}0000`;
+        //console.log('currentDate', currentDate);
+        const modifiedDate = `${currentYear}${currentMonth}${currentDay}${(parseInt(currentHour) +4).toString().padStart(2, "0")}3000`;
+        //console.log('modifief', modifiedDate);
+        //const initialday = (currentYear.toString() + currentMonth.toString() + currentDay.toString() + '000000');
+        //console.log({ initialday });
      
         axios.get<IEpg>(getStringTail(currentDate, modifiedDate)).then((resp) =>
         {
+            console.log(resp.data)
             dispatch({ type: '[UI]-UPDATE-CHANNELS', payload: resp.data.response.channels });
         });
     },[])
