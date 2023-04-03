@@ -7,6 +7,8 @@ export interface UiContextProps {
     toggleModal: () => void
     updateChannels: (channels: Channel[]) => void
     currentDate: Date;
+    startingTime: Date;
+    event: Event|undefined;
 }
 
 export const UIContext = createContext({} as UiContextProps);

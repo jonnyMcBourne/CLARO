@@ -15,8 +15,10 @@ export const ChannelCell: FC<Props> = ({ image, name, number }) =>
     return (
         <Box sx={ {
             display: 'flex',
+            width:columnChannelWidth,
             minWidth: columnChannelWidth,
             position: 'sticky',
+            zIndex:3,
             backgroundColor:'black',
             left: 0,
             height: cellheigh,
