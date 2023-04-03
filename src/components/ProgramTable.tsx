@@ -1,9 +1,12 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { UIContext } from '../context/Ui/UiContext';
 import Box from '@mui/material/Box';
 import { useContext } from 'react';
 import { HeaderTable } from './HeaderTable';
 import { BodyTable } from './BodyTable';
+import axios from 'axios';
+import { getStringTail } from '../utils';
+import { IEpg } from '../interfaces/IProgram';
 
 
 
@@ -11,17 +14,35 @@ import { BodyTable } from './BodyTable';
 export const ProgramTable = () =>
 {
 
-  const { currentDate } = useContext(UIContext);
+  const { currentDate, query,channels, updateChannels } = useContext(UIContext);
+  const { currentDateQuery, finishDateQuery, quantity } = query
+  const [ shownChannels, setShownChannels ] = useState(Number(quantity));
   const tableRef = useRef<HTMLDivElement>(null);
+  const [ isMaxReached, setIsMaxReached ] = useState(false);
+  console.log({ isMaxReached });
   
   const handleOnScroll = (e: React.UIEvent<HTMLDivElement>) =>
   {
-    const { scrollTop, scrollLeft } = e?.currentTarget;
-    console.log({ scrollTop }, { scrollLeft });
-    if (scrollTop > 500 && scrollTop <510)
+    const { scrollTop, scrollLeft, clientHeight, scrollHeight } = e?.currentTarget;
+    console.log({ scrollTop }, { scrollHeight }, { scrollHeight });
+    if (Math.floor(scrollTop + clientHeight) >= Math.floor(scrollHeight) - 400)
     {
-      console.log('fetch');
+      setShownChannels(prev => prev + 50);
+      getMoreChannels(Number(shownChannels) + 50);
     }
+  };
+
+
+  const getMoreChannels = async(ChannelQuanity:number) =>
+  {
+    if (isMaxReached)
+    {
+      return;
+    }
+    const resp = await axios.get<IEpg>(getStringTail(currentDateQuery, finishDateQuery, ChannelQuanity.toString()));
+    updateChannels(resp.data.response.channels)
+    setIsMaxReached(resp.data.response.total > 140);
+    console.log(resp.data.response);
   }
 useEffect(() => {
   if (tableRef && tableRef.current) {
@@ -32,7 +53,8 @@ useEffect(() => {
       tableRef.current.scrollLeft = currentTime.offsetLeft;
     }
   }
-}, [currentDate]);
+}, [ currentDate ]);
+  
 
 
   return (
