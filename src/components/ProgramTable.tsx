@@ -16,7 +16,12 @@ export const ProgramTable = () =>
   
   const handleOnScroll = (e: React.UIEvent<HTMLDivElement>) =>
   {
-    const { scrollTop, scrollLeft } = e?.currentTarget
+    const { scrollTop, scrollLeft } = e?.currentTarget;
+    console.log({ scrollTop }, { scrollLeft });
+    if (scrollTop > 500 && scrollTop <510)
+    {
+      console.log('fetch');
+    }
   }
 useEffect(() => {
   if (tableRef && tableRef.current) {

@@ -4,7 +4,6 @@ import { UIContext } from '../context/Ui/UiContext';
 import { ChannelCell } from './subComponents/ChannelCell';
 import { EventCell } from './subComponents';
 import './styles.css'
-import { Translate } from '@mui/icons-material';
 
 export const BodyTable = () =>
 {
