@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Box } from '@mui/system'
 import { DateStickyCell } from './subComponents'
 import { UIContext } from '../context/Ui/UiContext'
-import { cellWidth, getDatesArray } from '../utils'
+import { cellWidth, formatHour, getDatesArray } from '../utils'
 
 export const HeaderTable = () =>
 {
@@ -10,13 +10,8 @@ export const HeaderTable = () =>
 
   const hours = getDatesArray(currentDate.getHours() - 1, 6);
 
-  const formatHour = (date: Date) =>
-  {
-    return `${ date.getHours().toLocaleString('en-US', { minimumIntegerDigits: 2 }) }:${ date.getMinutes().toLocaleString('en-US', { minimumIntegerDigits: 2 })}:00`
-  }
-
   return (
-    <Box sx={ { display: 'flex', width: '100%', position: 'sticky', top: 0, zIndex:4, backgroundColor:'#3A3C40' } }>
+    <Box sx={ { display: 'flex', width: '5000%', position: 'sticky', top: 0, zIndex:4, backgroundColor:'#3A3C40' } }>
       <DateStickyCell content='Hoy' />
       {
         hours.map((hour, i) =>

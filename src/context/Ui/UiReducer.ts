@@ -1,10 +1,11 @@
 import { Reducer } from "react";
-import { Channel } from "../../interfaces/IProgram";
+import { Channel, Event } from "../../interfaces/IProgram";
 import { IUiInitialState, UiInitialState } from "./UiProvider";
 
 type action = | { type: '[UI]-OPEN-CLOSE-MODAL' }
     | { type: '[UI]-UPDATE-CHANNELS', payload: Channel[] }
-    | { type: '[UI]-UPDATE-DATE',payload: Date }
+    | { type: '[UI]-UPDATE-DATE', payload: Date }
+        | { type: '[UI]-UPDATE-EVENT',payload: Event }
 
 export const UiReducer:Reducer<IUiInitialState,action> = (state= UiInitialState,action) =>
 {
@@ -15,6 +16,8 @@ export const UiReducer:Reducer<IUiInitialState,action> = (state= UiInitialState,
             return { ...state, channels: action.payload }
         case '[UI]-UPDATE-DATE':
             return { ...state, currentDate: action.payload }
+        case '[UI]-UPDATE-EVENT':
+            return { ...state, event: action.payload }
         default:
             return {...state}
     }

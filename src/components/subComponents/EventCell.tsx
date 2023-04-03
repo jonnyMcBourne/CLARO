@@ -1,17 +1,20 @@
-import React, { FC, useEffect, useState } from 'react'
+import  { FC, useContext, useEffect, useState } from 'react'
 import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import { cellheigh } from '../../utils'
+import { cellheigh, formatHour } from '../../utils'
+import './styles.css';
+import { Event } from '../../interfaces/IProgram';
+import { UIContext } from '../../context/Ui/UiContext';
 
 interface Props
 {
-    name: string
-    being_date: string
-    finish_date: string,
-    duration: string,
+event:Event
 }
-export const EventCell: FC<Props> = ({ name, being_date, duration, finish_date }) =>
+
+export const EventCell: FC<Props> = ({ event}) =>
 {
+    const { updateEvent}=useContext(UIContext);
+    const { name, duration,date_begin,date_end, } = event
     const [ cellWidth, setCellWidth ] = useState(0);
 
     const getDurationMinutes = (duration: string): number =>
@@ -19,19 +22,36 @@ export const EventCell: FC<Props> = ({ name, being_date, duration, finish_date }
         const [ hours, minutes ] = duration.split(':');  
         return Number(hours) * 60 + Number(minutes);
     }
+
+    const onHover = (event:Event) =>
+    {
+        updateEvent(event);
+    }
+
     useEffect(() =>
     {
         const durationInMinutes = getDurationMinutes(duration);
         setCellWidth(((durationInMinutes * 40) / 60));
-    }, [duration,cellWidth]);
-  
+    }, [ duration, cellWidth ]);
+
 
     return (
-        <Box sx={ { display:'flex', flexDirection:'column',justifyContent:'center',alignItems:'center' ,backgroundColor: '#3A3C40', borderRight: '.2px solid #c5c9d1', height: cellheigh, minWidth: `${ cellWidth }em`, borderBottom: '.2px solid #9a9b9c',} }>
+        <Box
+            onMouseOver={ () => onHover(event) }
+            className="eventContainer"
+            sx={ {
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#3A3C40',
+                borderRight: '.2px solid #c5c9d1',
+                height: cellheigh,
+                minWidth: `${ cellWidth }em`,
+                borderBottom: '.2px solid #9a9b9c',
+            } }>
             <Typography>{ name }</Typography>
-            <Typography>{ `${ being_date } - ${ finish_date }` }</Typography>
-            <Typography>{ duration }</Typography>
-            <Typography>{ getDurationMinutes(duration)}</Typography>
+            <Typography>{ `${ formatHour(new Date(date_begin))  } - ${ formatHour(new Date(date_end)) }` }</Typography>  
         </Box>
     )
 }
