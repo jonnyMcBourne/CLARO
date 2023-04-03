@@ -14,17 +14,15 @@ import { IEpg } from '../interfaces/IProgram';
 export const ProgramTable = () =>
 {
 
-  const { currentDate, query,channels, updateChannels } = useContext(UIContext);
+  const { currentDate, query, updateChannels } = useContext(UIContext);
   const { currentDateQuery, finishDateQuery, quantity } = query
   const [ shownChannels, setShownChannels ] = useState(Number(quantity));
   const tableRef = useRef<HTMLDivElement>(null);
   const [ isMaxReached, setIsMaxReached ] = useState(false);
-  console.log({ isMaxReached });
   
   const handleOnScroll = (e: React.UIEvent<HTMLDivElement>) =>
   {
-    const { scrollTop, scrollLeft, clientHeight, scrollHeight } = e?.currentTarget;
-    console.log({ scrollTop }, { scrollHeight }, { scrollHeight });
+    const { scrollTop, clientHeight, scrollHeight } = e?.currentTarget;
     if (Math.floor(scrollTop + clientHeight) >= Math.floor(scrollHeight) - 400)
     {
       setShownChannels(prev => prev + 50);
@@ -42,7 +40,6 @@ export const ProgramTable = () =>
     const resp = await axios.get<IEpg>(getStringTail(currentDateQuery, finishDateQuery, ChannelQuanity.toString()));
     updateChannels(resp.data.response.channels)
     setIsMaxReached(resp.data.response.total > 140);
-    console.log(resp.data.response);
   }
 useEffect(() => {
   if (tableRef && tableRef.current) {
