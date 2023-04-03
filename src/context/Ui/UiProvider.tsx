@@ -35,7 +35,7 @@ export const UiInitialState:IUiInitialState = {
 
 export const UiProvider: FC<PropsWithChildren<Props>> = ({ children }) =>
 {
-    const isFirstRender = useRef(true);
+    //const isFirstRender = useRef(true);
     const [ state, dispatch ] = useReducer(UiReducer, UiInitialState);
 
     const toggleModal = () =>
@@ -59,11 +59,7 @@ export const UiProvider: FC<PropsWithChildren<Props>> = ({ children }) =>
 
     useEffect(() =>
     {
-        if (isFirstRender.current)
-        {
-            isFirstRender.current = false;
-            return;
-        }
+
         const now = new Date();
         const currentYear = now.getFullYear();
         const currentMonth = (now.getMonth()+1).toLocaleString('en-US', { minimumIntegerDigits: 2 });
