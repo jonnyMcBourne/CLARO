@@ -51,16 +51,18 @@ export const UiProvider: FC<PropsWithChildren<Props>> = ({ children }) =>
         const currentYear = now.getFullYear();
         const currentMonth = (now.getMonth()+1).toLocaleString('en-US', { minimumIntegerDigits: 2 });
         const currentDay = now.getDate().toLocaleString('en-US', { minimumIntegerDigits: 2 });
-        console.log('currentDay', currentDay);
+        //console.log('currentDay', currentDay);
         const currentHour = now.getHours();
         const currentDate = (currentYear.toString() + currentMonth.toString() + currentDay.toString() + (currentHour - 1).toString()) + '3000';
-        console.log('currentDate', currentDate);
+        //console.log('currentDate', currentDate);
         const modifiedDate = (currentYear.toString() + currentMonth.toString() + currentDay.toString() + (currentHour + 4).toString()) + '0000';
-        console.log('modifief', modifiedDate);
+        //console.log('modifief', modifiedDate);
+        //const initialday = (currentYear.toString() + currentMonth.toString() + currentDay.toString() + '000000');
+        //console.log({ initialday });
      
         axios.get<IEpg>(getStringTail(currentDate, modifiedDate)).then((resp) =>
         {
-            console.log(resp.data)
+            //console.log(resp.data)
             dispatch({ type: '[UI]-UPDATE-CHANNELS', payload: resp.data.response.channels });
         });
     },[])

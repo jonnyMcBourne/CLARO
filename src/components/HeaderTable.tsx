@@ -7,24 +7,28 @@ import { cellWidth, getDatesArray } from '../utils'
 export const HeaderTable = () =>
 {
   const { currentDate } = useContext(UIContext);
-  
-  const hours = getDatesArray(currentDate.getHours() - 1,  4);
 
-  const formatHour = (date:Date) =>
+  const hours = getDatesArray(currentDate.getHours() - 1, 10);
+
+  const formatHour = (date: Date) =>
   {
-    return `${date.getHours().toLocaleString('en-US', { minimumIntegerDigits: 2 })}:${date.getMinutes().toLocaleString('en-US', { minimumIntegerDigits: 2 })}`
+    return `${ date.getHours().toLocaleString('en-US', { minimumIntegerDigits: 2 }) }:${ date.getMinutes().toLocaleString('en-US', { minimumIntegerDigits: 2 }) }`
   }
 
   return (
-    <Box sx={ { display: 'flex', width: '100%', position:'sticky',top:0} }>
+    <Box sx={ { display: 'flex', width: '100%', position: 'sticky', top: 0 } }>
       <DateStickyCell content='Hoy' />
       {
-            hours.map((hour,i) =>
+        hours.map((hour, i) =>
         {
-              return <Box key={ `${ hour }-${ i }` } sx={ { minWidth: cellWidth } }>{ formatHour(hour)}</Box> 
+          return <Box key={ `${ hour }-${ i }` } sx={ { minWidth: cellWidth, display:'flex', alignItems:'center', justifyContent:'center' } }>
+            <Box>
+              { formatHour(hour) }
+            </Box>
+          </Box>
         })
       }
-      <Box sx={ { minWidth: cellWidth, backgroundColor: 'red', position:'sticky', top:0,right:0 } }>Buttons</Box>
+      <Box sx={ { minWidth: cellWidth, backgroundColor: 'red', position: 'sticky', top: 0, right: 0, zIndex: 4 } }>Buttons</Box>
     </Box>
   )
 }

@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import { cellheigh, cellWidth } from '../../utils'
+import { cellheigh, columnChannelWidth } from '../../utils'
 
 interface Props
 {
@@ -15,7 +15,7 @@ export const ChannelCell: FC<Props> = ({ image, name, number }) =>
     return (
         <Box sx={ {
             display: 'flex',
-            minWidth: cellWidth,
+            minWidth: columnChannelWidth,
             position: 'sticky',
             backgroundColor:'black',
             left: 0,

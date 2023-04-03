@@ -2,12 +2,11 @@ import { useContext } from 'react';
 import { Box } from '@mui/system';
 import { UIContext } from '../context/Ui/UiContext';
 import { ChannelCell } from './subComponents/ChannelCell';
-import { cellheigh } from '../utils';
+import { EventCell } from './subComponents';
 
 export const BodyTable = () =>
 {
   const { channels } = useContext(UIContext);
-console.log(channels)
   return (
     <Box sx={ { height: '100%', backgroundColor: 'green', width: '100%', position: 'absolute' } }>
         {
@@ -17,7 +16,7 @@ console.log(channels)
             <Box sx={{display:'flex', width:'100%'}}>
               {
                 channel.events.map((event,i) => (
-                  <Box sx={ { backgroundColor: 'brown', width: '30%', border: '1px solid black',height:cellheigh } } key={ `${event.id}-${i}` } >{ event.name}</Box>
+                  <EventCell key={event.id} name={ event.name } duration={ event.duration }  being_date={event.date_begin.toLocaleString() } finish_date={event.date_end.toLocaleString()} />
                 ))
               }
         </Box>
