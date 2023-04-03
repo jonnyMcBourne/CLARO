@@ -32,10 +32,7 @@ export const BodyTable = () =>
                    return (
                      <EventCell
                        key={ event.id }
-                       name={ event.name }
-                       duration={ event.duration }
-                       being_date={ event.date_begin.toLocaleString() }
-                       finish_date={ event.date_end.toLocaleString() }
+                       event={event}
                      />
                     )
                   })

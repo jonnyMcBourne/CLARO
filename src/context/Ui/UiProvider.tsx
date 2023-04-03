@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { FC, PropsWithChildren, useEffect, useReducer, useRef } from 'react'
-import { Channel, IEpg } from '../../interfaces/IProgram'
+import { Channel, Event, IEpg } from '../../interfaces/IProgram'
 import { getStringTail } from '../../utils'
 import { UIContext } from './UiContext'
 import { UiReducer } from './UiReducer'
@@ -47,6 +47,11 @@ export const UiProvider: FC<PropsWithChildren<Props>> = ({ children }) =>
         dispatch({type:'[UI]-UPDATE-CHANNELS',payload:channels})
     }
 
+    const updateEvent = (event:Event) =>
+    {
+        dispatch({ type: '[UI]-UPDATE-EVENT', payload: event });
+    }
+
     useEffect(() =>
     {
         dispatch({ type: '[UI]-UPDATE-DATE', payload: new Date() })
@@ -75,13 +80,13 @@ export const UiProvider: FC<PropsWithChildren<Props>> = ({ children }) =>
      
         axios.get<IEpg>(getStringTail(currentDate, modifiedDate)).then((resp) =>
         {
-            console.log(resp.data)
+            //console.log(resp.data)
             dispatch({ type: '[UI]-UPDATE-CHANNELS', payload: resp.data.response.channels });
         });
     },[])
 
   return (
-      <UIContext.Provider value={{...state,toggleModal,updateChannels}} >
+      <UIContext.Provider value={{...state,toggleModal,updateChannels,updateEvent}} >
           {children}
     </UIContext.Provider>
   )
