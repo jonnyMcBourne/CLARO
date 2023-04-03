@@ -3,13 +3,26 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { UiProvider } from './context/Ui/UiProvider';
+import { SWRConfig } from "swr";
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { darkTheme } from './themes';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <SWRConfig value={ {
+      fetcher: (resource, init) => fetch(resource, init).then(res => res.json())
+    }} >
+      <UiProvider>
+        <ThemeProvider theme={ darkTheme}>
+          <CssBaseline/>
+            <App />
+        </ThemeProvider>
+      </UiProvider>
+    </SWRConfig>
   </React.StrictMode>
 );
 

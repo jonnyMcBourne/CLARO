@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useContext } from 'react';
+import { UIContext } from './context/Ui/UiContext';
+import { Button } from '@mui/material';
 
-function App() {
+import { Box } from '@mui/system';
+import { EPGModal } from './components/';
+
+
+function App ()
+{
+  const { toggleModal } = useContext(UIContext);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box sx={{position:'relative', backgroundColor:'white'}} >
+      <Box sx={ { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' } } >
+        <Button variant='contained' onClick={ toggleModal }  >Mostrar EPG</Button>
+      </Box>
+      <EPGModal/>
+    </Box>
+
   );
 }
 
